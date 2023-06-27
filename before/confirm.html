@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Comfrim Booking</title>
+    <link rel="stylesheet" href="loginGP.css">
+
+
+    <style>
+        .pill-nav a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px;
+            text-decoration: none;
+            font-size: 17px;
+            border-radius: 5px;
+        }
+
+        /* Change the color of links on mouse-over */
+        .pill-nav a:hover {
+            background-color: black;
+            color: white;
+        }
+
+        /* Add a color to the active/current link */
+        .pill-nav a.active {
+            background-color: black;
+            color: white;
+        }
+
+        .button {
+            background-color: #EFD15C;
+            /* Green */
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pill-nav">
+
+        <a href="Main_Page.html">Home</a>
+        <a href="loginGP.html">Login</a>
+        <a href="menuGP.html">Menu</a>
+        <a href="procedure.html">Procedure</a>
+        <a href="faci_info.html">Facilities</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+
+    <div class="box">
+        <div class="inner-box">
+            <form action="afterregisterGP.html" method="post">
+
+                <h1>Your Booking Have Been Comfirm</h1>
+                <h2>Sport Type : <h2 id="sport"></h2>
+                </h2>
+                <br />
+                <h3 style="text-align: center;"> Thank You</h3>
+                <br />
+                <a class="button" href="Main_Page.html"> Home</a>
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+<script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const sport = urlParams.get('sport');
+    document.getElementById("sport").innerHTML = sport.toUpperCase();
+</script>
