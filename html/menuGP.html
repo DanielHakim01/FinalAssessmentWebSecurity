@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>MENU</title>
+  <link rel="stylesheet" href="../CSS_JS/faciinfo.css">
+</head>
+
+<style>
+  .button {
+    background-color: #1b9284;
+    border: none;
+    color: rgb(255, 255, 255);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 25px;
+  }
+</style>
+<!-- MAIN (Center website) -->
+<div class="main">
+  <div class="pill-nav">
+
+    <a style ="color: #1b9284;" href="Main_Page.html">Home</a>
+    <a style ="color: #1b9284;" href="loginGP.html">Login</a>
+    <a style ="color: #1b9284;" href="menuGP.html" class="active">Menu</a>
+    <!-- <a style ="color: #1b9284;" href="procedure.html">Procedure</a> -->
+    <a style ="color: #1b9284;" href="faci_info.html">Facilities</a>
+    <!-- <a style ="color: #1b9284;" href="contact.html">Contact Us</a> -->
+  </div>
+  <h1>IIUM SPORT CENTRE</h1>
+  <hr>
+
+  <!-- Portfolio Gallery Grid -->
+  <div class="row">
+    <div class="column">
+      <div class="content">
+        <h3 style="color: #1b9284; text-align: center;">BADMINTON</h3>
+        <img src="../asset/badminton.jpg" alt="badminton" style="width:100%">
+        <center>
+          <button type="button" class="button" style="margin-top: 15px;" onclick="redirect('badminton')">Book</button>
+        </center>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="content">
+        <h3 style="color: #1b9284; text-align: center;">TENNIS</h3>
+        <img src="../asset/tennis.jpg" alt="tennnis" style="width:100%">
+        <center>
+          <button type="button" class="button" style="margin-top: 15px;" onclick="redirect('tennis')">Book</button>
+        </center>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="content">
+        <h3 style="color: #1b9284; text-align: center;">FUTSAL</h3>
+        <img src="../asset/futsal court.jfif" alt="futsal" style="width:100%">
+        <center>
+          <button type="button" class="button" style="margin-top: 15px;" onclick="redirect('futsal')">Book</button>
+        </center>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="content">
+        <h3 style="color: #1b9284; text-align: center;">SWIMMING</h3>
+        <img src="../asset/swimming pool.jfif" alt="swimming" style="width:100%">
+        <center>
+          <button type="button" class="button" style="margin-top: 15px;" onclick="redirect('swimming')">Book</button>
+        </center>
+      </div>
+    </div>
+    <!-- END MAIN -->
+  </div>
+
+  </body>
+
+</html>
+
+<script>
+  function redirect(sport){
+    window.location.replace("confirm.html?sport="+sport);
+  }
+  
+</script>
