@@ -2,24 +2,31 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8" />
+    <title>User Authentication</title>
     <link rel="stylesheet" href="../CSS_JS/loginGP.css" />
     <script src="../CSS_JS/loginGP.js" charset="utf-8"></script>
   </head>
 
   <body>
-    <form class="box" action="loginGP.html" method="post">
+    <form class="box" action="login.php" method="post">
       <h1>LOG IN TO YOUR ACCOUNT</h1>
-      <input type="text" name="" placeholder="USERNAME" id="admin" />
-      <br />
-      <input type="password" name="" placeholder="PASSWORD" id="password" />
+
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required><br><br>
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br><br>
+      
       <div class="password">
         <a href="forgotpasswordGP.html">Forgot Password?</a>
       </div>
-      <input type="submit" name="" value="LOG IN" onclick="validate()" />
+      
+      <input type="submit" value="LOG IN"/>
+      
       <div class="signup_link">
-        Dont have an account?<a href="registerGP.html"> Sign Up </a>
+        Dont have an account?<a href="registerGP.php"> Sign Up </a>
       </div>
+
     </form>
   </body>
 </html>
