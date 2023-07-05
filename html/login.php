@@ -1,37 +1,4 @@
-<!-- <!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="../CSS_JS/loginGP.css" />
-    <script src="../CSS_JS/loginGP.js" charset="utf-8"></script>
-  </head>
-
-  <body>
-    <form class="box" action="loginGP.html" method="post">
-      <h1>LOG IN TO YOUR ACCOUNT</h1>
-
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required><br><br>
-      
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required><br><br>
-      
-      <div class="password">
-        <a href="forgotpasswordGP.html">Forgot Password?</a>
-      </div>
-      
-      <input type="submit" value="LOG IN"/>
-      
-      <div class="signup_link">
-        Dont have an account?<a href="registerGP.html"> Sign Up </a>
-      </div>
-
-    </form>
-  </body>
-</html> -->
-
-<?php   
+<?php
 session_start();
 
 // Check if the request method is POST
@@ -59,24 +26,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Verify password
             if (password_verify($password, $db_password)) {
-                // Login successful, save user session
+                // Login successful, generate random session ID
+                $session_id = bin2hex(random_bytes(16));
+
+                // Disable output buffering
+                // while (ob_get_level()) {
+                //     ob_end_flush();
+                // }
+
+                // Print the session ID
+                echo "Session ID: " . $session_id . "<br>";
+
+                // Save user session with random session ID
                 $_SESSION['username'] = $username;
+                $_SESSION['session_id'] = $session_id;
 
                 // Redirect to home.php or privilege.php if the username is "admin"
                 if ($username === 'admin') {
                     header("Location: privilege.php");
                 } else {
-                    header("Location: studentForm.html");
+                    header("Location: Main_Page.html");
                 }
                 exit();
             } else {
                 // Login failed, display error message
-                header('Location: login.html?error=Invalid username or password.');
+                header('Location: loginGP.html?error=Invalid username or password.');
                 exit();
             }
         } else {
             // Login failed, display error message
-            header('Location: login.html?error=Invalid username.');
+            header('Location: loginGP.html?error=Invalid username.');
             exit();
         }
     }
