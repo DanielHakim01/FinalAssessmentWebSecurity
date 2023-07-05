@@ -2,7 +2,7 @@
 header("X-Frame-Options: DENY");
 header("Content-Security-Policy: default-src 'self';");
 
-function generateCSRFToken() {
+/*function generateCSRFToken() {
     if (empty($_SESSION['csrf_token'])) {
       if (function_exists('random_bytes')) {
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -11,5 +11,5 @@ function generateCSRFToken() {
       }
     }
     return $_SESSION['csrf_token'];
-}
+}*/
 ?>
