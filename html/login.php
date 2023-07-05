@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Validate username against whitelist pattern
         if (!preg_match($username_pattern, $username)) {
-            header('Location: loginGP.html?error=Invalid username format.');
+            echo '<script>alert("Invalid username format."); window.location.href = "loginGP.html";</script>';
             exit();
         }
 
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Validate password against whitelist pattern
             if (!preg_match($password_pattern, $password)) {
-                header('Location: loginGP.html?error=Invalid password format.');
+                echo '<script>alert("Invalid password format."); window.location.href = "loginGP.html";</script>';
                 exit();
             }
 
@@ -61,12 +61,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit();
             } else {
                 // Wrong password, display error message
-                header('Location: loginGP.html?error=Wrong password.');
-                exit();
+                echo '<script>alert("Wrong password. Please try again."); window.location.href = "loginGP.html";</script>';
             }
         } else {
             // No username exists, display error message
-            header('Location: loginGP.html?error=Invalid username.');
+            echo '<script>alert("Invalid username. Please try again."); window.location.href = "loginGP.html";</script>';
             exit();
         }
     }
