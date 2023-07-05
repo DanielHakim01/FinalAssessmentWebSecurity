@@ -1,15 +1,13 @@
 <?php
+require_once('../app/config.php');
 session_start();
 
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Check if user has submitted the form
-    $database_host = 'localhost';
-    $database_user = 'root';
-    $database_password = '';
-    $database_name = 'user_info';
-    $conn = mysqli_connect($database_host, $database_user, $database_password, $database_name);
 
+    // Check if user has submitted the form
+ 
+    $conn = mysqli_connect($database_host, $database_user, $database_password, $database_name);
     if (isset($_POST['username']) && isset($_POST['password'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
