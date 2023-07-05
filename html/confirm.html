@@ -78,8 +78,10 @@
 
     <div class="box">
         <div class="inner-box">
+            <form method="POST" action="process_booking.php">
             <label for="bookingType">Booking Type:</label>
-            <select id="bookingType" disabled>
+            
+            <select id="bookingType" name="bookingType">
                 <option value="badminton">Badminton</option>
                 <option value="tennis">Tennis</option>
                 <option value="futsal">Futsal</option>
@@ -88,19 +90,21 @@
             <br><br>
 
             <label for="fullName">Full Name:</label>
-            <input type="text" id="fullName" required>
+            <input type="text" id="fullName" name="fullName" required>
+
             <br><br>
 
             <label for="matricID">Matric ID:</label>
-            <input type="text" id="matricID" required>
+            <input type="text" id="matricID" name="matricID" required>
+
             <br><br>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" required>
+            <input type="email" id="email" name="email" required>
             <br><br>
 
             <label for="timeSlot">Time Slot:</label>
-            <select id="timeSlot" required>
+            <select id="timeSlot" name="timeSlot" required>
                 <option value="" selected disabled>Select a time slot</option>
                 <option value="8-10">8 a.m - 10 a.m</option>
                 <option value="10:30-12:30">10:30 a.m - 12:30 p.m</option>
@@ -110,15 +114,17 @@
             <br><br>
 
             <label for="contactNumber">Contact Number:</label>
-            <input type="tel" id="contactNumber" required>
+            <input type="tel" id="contactNumber" name="contactNumber" required>
             <br><br>
 
             <label for="participants">Number of Participants:</label>
-            <input type="number" id="participants" required>
+            <input type="number" id="participants" name="participants" required>
             <br><br>
 
             <input type="submit" value="Confirm Booking">
+        </form>
         </div>
+
     </div>
 
     <script>
