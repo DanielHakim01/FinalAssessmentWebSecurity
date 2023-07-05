@@ -4,9 +4,8 @@ session_start();
 
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     // Check if user has submitted the form
- 
+
     $conn = mysqli_connect($database_host, $database_user, $database_password, $database_name);
     if (isset($_POST['username']) && isset($_POST['password'])) {
         $username = $_POST['username'];
@@ -87,6 +86,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Session is idle, destroy it and redirect to login page
                 session_unset();
                 session_destroy();
+                session_write_close(); // Close the session file
+                setcookie(session_name(), '', 0, '/'); // Destroy the session cookie
                 header("Location: loginGP.html?error=Session expired due to inactivity.");
                 exit();
             } else {
