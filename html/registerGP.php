@@ -58,29 +58,49 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
     if (mysqli_num_rows($result_check) > 0) {
         // Show error message and redirect to registration page
         echo "<script>showError('Error: Username already exists. Please choose a different username.');</script>";
-      } elseif (strlen($password) < 8) {
+    } elseif (strlen($password) < 8) {
         // Show error message and redirect to registration page
         echo "<script>showError('Error: Password must be at least 8 characters long. Please try again.');</script>";
-      } elseif (!preg_match('/^[a-zA-Z0-9]+$/', $username)) {
+    } elseif (!preg_match('/^[a-zA-Z0-9]+$/', $username)) {
         // Show error message and redirect to registration page
         echo "<script>showError('Error: Username must contain only letters and numbers. Please try again.');</script>";
-      } else {
+    } else {
+        // Validate other input fields using regex patterns
+
+        // Regex pattern for name field: Allows alphabets, spaces, and dashes, 2-50 characters
+        $name_pattern = '/^[a-zA-Z -]{2,50}$/';
+        $name = $_POST['name'];
+        if (!preg_match($name_pattern, $name)) {
+            // Show error message and redirect to registration page
+            echo "<script>showError('Error: Invalid name format.');</script>";
+            exit();
+        }
+
+        // Regex pattern for email field: Validates email format
+        $email_pattern = '/^[^\s@]+@[^\s@]+\.[^\s@]+$/';
+        $email = $_POST['email'];
+        if (!preg_match($email_pattern, $email)) {
+            // Show error message and redirect to registration page
+            echo "<script>showError('Error: Invalid email format.');</script>";
+            exit();
+        }
+
         // Insert the username and hashed password into the database
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (username, password) VALUES ('$username','$hashed_password')";
+        $sql = "INSERT INTO users (username, password, name, email) VALUES ('$username', '$hashed_password', '$name', '$email')";
         $result = mysqli_query($conn, $sql);
-      
+
         if ($result) {
-          // Get the generated ID
-          $id = mysqli_insert_id($conn);
-          // Registration successful, display success message and redirect to login page
-          echo "<script>alert('User registration successful! Please login.');</script>";
-          header("Location: ../html/loginGP.html? success=User registration successful! Please login.");
-          exit();
-      }
-       else {
-          // Show error message and redirect to registration page
-          echo "<script>showError('Error: Could not register user. Please try again.');</script>";
+            // Get the generated ID
+            $id = mysqli_insert_id($conn);
+            // Registration successful, display success message and redirect to login page
+            echo "<script>alert('User registration successful! Please login.');</script>";
+            header("Location: ../html/loginGP.html? success=User registration successful! Please login.");
+            exit();
+        } else {
+            // Show error message and redirect to registration page
+            echo "<script>showError('Error: Could not register user. Please try again.');</script>";
         }
-      }
-    }      
+    }
+}
+?>
