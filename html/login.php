@@ -15,6 +15,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $username = $_POST['username'];
         $password = $_POST['password'];
 
+        // Whitelist validation using regex
+        $username_pattern = '/^[a-zA-Z0-9_]{3,20}$/'; // Allow alphanumeric and underscore, 3-20 characters
+        $password_pattern = '/^[a-zA-Z0-9!@#$%^&*()]{8,}$/'; // Allow alphanumeric and some special characters, minimum 8 characters
+
+        // Validate username against whitelist pattern
+        if (!preg_match($username_pattern, $username)) {
+            header('Location: loginGP.html?error=Invalid username format.');
+            exit();
+        }
+
+        // Validate password against whitelist pattern
+        if (!preg_match($password_pattern, $password)) {
+            header('Location: loginGP.html?error=Invalid password format.');
+            exit();
+        }
+
         // Retrieve user from database
         $sql = "SELECT * FROM users WHERE username='$username'";
         $result = mysqli_query($conn, $sql);
