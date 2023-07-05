@@ -3,7 +3,6 @@ session_start();
 
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     // Check if user has submitted the form
     $database_host = 'localhost';
     $database_user = 'root';
@@ -14,22 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['username']) && isset($_POST['password'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
-
-        // Whitelist validation using regex
-        $username_pattern = '/^[a-zA-Z0-9_]{3,20}$/'; // Allow alphanumeric and underscore, 3-20 characters
-        $password_pattern = '/^[a-zA-Z0-9!@#$%^&*()]{8,}$/'; // Allow alphanumeric and some special characters, minimum 8 characters
-
-        // Validate username against whitelist pattern
-        if (!preg_match($username_pattern, $username)) {
-            header('Location: loginGP.html?error=Invalid username format.');
-            exit();
-        }
-
-        // Validate password against whitelist pattern
-        if (!preg_match($password_pattern, $password)) {
-            header('Location: loginGP.html?error=Invalid password format.');
-            exit();
-        }
 
         // Retrieve user from database
         $sql = "SELECT * FROM users WHERE username='$username'";
@@ -46,22 +29,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $session_id = bin2hex(random_bytes(16));
 
                 // Disable output buffering
-                // while (ob_get_level()) {
-                //     ob_end_flush();
-                // }
+                while (ob_get_level()) {
+                    ob_end_flush();
+                }
 
-                // Print the session ID
-                echo "Session ID: " . $session_id . "<br>";
-
-                // Save user session with random session ID
+                // Save user session with random session ID and last activity time
                 $_SESSION['username'] = $username;
                 $_SESSION['session_id'] = $session_id;
+                $_SESSION['last_activity'] = time();
 
                 // Redirect to home.php or privilege.php if the username is "admin"
                 if ($username === 'admin') {
                     header("Location: privilege.php");
                 } else {
-                    header("Location: Main_Page.html");
+                    header("Location: menuGP.html");
                 }
                 exit();
             } else {
@@ -74,6 +55,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: loginGP.html?error=Invalid username.');
             exit();
         }
+    }
+} else {
+    // Check if session is active
+    if (isset($_SESSION['username'])) {
+        // Check if last activity timestamp is set
+        if (isset($_SESSION['last_activity'])) {
+            // Get the current timestamp
+            $currentTimestamp = time();
+
+            // Get the idle timeout in seconds
+            $idleTimeout = 60; // 1 minute
+
+            // Calculate the idle time
+            $idleTime = $currentTimestamp - $_SESSION['last_activity'];
+
+            if ($idleTime >= $idleTimeout) {
+                // Session is idle, destroy it and redirect to login page
+                session_unset();
+                session_destroy();
+                header("Location: loginGP.html?error=Session expired due to inactivity.");
+                exit();
+            } else {
+                // Update last activity timestamp
+                $_SESSION['last_activity'] = $currentTimestamp;
+            }
+        } else {
+            // Set the last activity timestamp
+            $_SESSION['last_activity'] = time();
+        }
+    } else {
+        // Session is not active, redirect to login page
+        header("Location: loginGP.html");
+        exit();
     }
 }
 ?>
