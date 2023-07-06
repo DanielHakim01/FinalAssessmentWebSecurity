@@ -153,11 +153,11 @@ Here, username and password will be compared to the username and hashed password
                     exit();
                 } else {
                     // Wrong password, display error message
-                    exit('Wrong password. Please try again.');
+                    echo "<script>alert('Wrong password. Please try again.'); window.location.href = 'login.php';</script>";
                 }
             } else {
                 // No username exists, display error message
-                exit('Invalid username. Please try again.');
+                echo "<script>alert('Invalid username. Please try again.'); window.location.href = 'login.php';</script>";
             }
         }
     }
