@@ -205,3 +205,26 @@ This line will be needed in every php code in order to call the [idle.php](html/
       ?>  
 
 ---------------------
+
+
+User can also log out of their session by clicking the log out button.<br>
+Once logged out it will clear all session variables, destroy the session, and then redirect the user back to the login page. By doing so, the user effectively logs out of their session.<br>
+
+---------------------
+
+<?php
+session_start();
+
+// Clear all session variables
+session_unset();
+
+// Destroy the session
+session_destroy();
+
+// Redirect the user to the login page
+header("Location: login.php");
+exit();
+?>
+
+
+---------------------
