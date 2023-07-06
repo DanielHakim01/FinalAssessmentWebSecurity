@@ -69,8 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             } else {
                 // No username exists, display error message
-
-              
                 echo "<script>alert('Invalid username. Please try again.'); window.location.href = 'login.php';</script>";
                
             }
