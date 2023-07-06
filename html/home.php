@@ -15,7 +15,7 @@ require_once('../html/idle.php');
 <div class="pill-nav">
   <a href="Main_Page.html"class = "active">Home</a>
   <a href="menuGP.php">Menu</a>
-  <a href="faci_info.html">Facilities</a>
+  <a href="faci_info.php">Facilities</a>
 </div>
 
 <centre>
