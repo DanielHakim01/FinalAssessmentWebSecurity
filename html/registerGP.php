@@ -74,8 +74,7 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
           // Get the generated ID
           $id = mysqli_insert_id($conn);
           // Registration successful, display success message and redirect to login page
-          echo "<script>alert('User registration successful! Please login.');</script>";
-          header("Location: ../html/loginGP.html? success=User registration successful! Please login.");
+          echo "<script>alert('User registration successful! Please login.'); window.location.href = 'loginGP.html';</script>";
           exit();
       }
        else {
