@@ -19,3 +19,10 @@ In confirm.php
 
 
 -----
+
+
+In process_booking.php
+
+------
+        
+------
