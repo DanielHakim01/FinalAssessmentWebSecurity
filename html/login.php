@@ -38,15 +38,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Verify password
             if (password_verify($password, $db_password)) {
+
                 // Login successful, generate random session ID
                 $session_id = bin2hex(random_bytes(16));
 
-                // Disable output buffering
-                while (ob_get_level()) {
-                    ob_end_flush();
-                }
+                // // Disable output buffering
+                // while (ob_get_level()) {
+                //     ob_end_flush();
+                // }
 
-                // Save user session with random session ID and last activity time
+                // // Save user session with random session ID and last activity time
                 $_SESSION['username'] = $username;
                 $_SESSION['session_id'] = $session_id;
                 $_SESSION['last_activity'] = time();
@@ -55,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($username === 'admin') {
                     header("Location: privilege.php");
                 } else {
-                    header("Location: menuGP.html");
+                    header("Location: menuGP.php");
                 }
                 exit();
             } else {
@@ -68,40 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
     }
-} else {
-    // Check if session is active
-    if (isset($_SESSION['username'])) {
-        // Check if last activity timestamp is set
-        if (isset($_SESSION['last_activity'])) {
-            // Get the current timestamp
-            $currentTimestamp = time();
-
-            // Get the idle timeout in seconds
-            $idleTimeout = 60; // 1 minute
-
-            // Calculate the idle time
-            $idleTime = $currentTimestamp - $_SESSION['last_activity'];
-
-            if ($idleTime >= $idleTimeout) {
-                // Session is idle, destroy it and redirect to login page
-                session_unset();
-                session_destroy();
-                session_write_close(); // Close the session file
-                setcookie(session_name(), '', 0, '/'); // Destroy the session cookie
-                header("Location: loginGP.html?error=Session expired due to inactivity.");
-                exit();
-            } else {
-                // Update last activity timestamp
-                $_SESSION['last_activity'] = $currentTimestamp;
-            }
-        } else {
-            // Set the last activity timestamp
-            $_SESSION['last_activity'] = time();
-        }
-    } else {
-        // Session is not active, redirect to login page
-        header("Location: loginGP.html");
-        exit();
-    }
+// 
 }
 ?>
