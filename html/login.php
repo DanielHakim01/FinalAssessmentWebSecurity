@@ -86,23 +86,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </head>
 
   <body>
-    <form class="box" action="login.php" method="post">
-      <h1>LOG IN TO YOUR ACCOUNT</h1>
+  <form class="box" action="login.php" method="post" onsubmit="return validateForm()">
+    <h1>LOG IN TO YOUR ACCOUNT</h1>
 
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required><br><br>
-      
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required><br><br>
-      
-      <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
-      
-      <input type="submit" value="LOG IN"/>
-  
-      <div class="signup_link">
-        Don't have an account?<a href="registerGP.php"> Sign Up </a>
-      </div>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br><br>
 
-    </form>
-  </body>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+
+    <input type="submit" value="LOG IN"/>
+
+    <div class="signup_link">
+      Don't have an account? <a href="registerGP.php">Sign Up</a>
+    </div>
+  </form>
+
+  <script>
+    function validateForm() {
+      // Valid font families
+      var validFontFamilies = [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "Roboto",
+        "Oxygen-Sans",
+        "Ubuntu",
+        "Cantarell",
+        "Helvetica Neue",
+        "sans-serif"
+      ];
+
+      // Validate font family
+      var inputs = document.getElementsByTagName("input");
+
+      for (var i = 0; i < inputs.length; i++) {
+        var font = window.getComputedStyle(inputs[i], null).getPropertyValue("font-family");
+
+        if (!isValidFontFamily(font)) {
+          alert("Please use the system default font for input fields.");
+          inputs[i].focus();
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    function isValidFontFamily(fontFamily) {
+      for (var i = 0; i < validFontFamilies.length; i++) {
+        if (fontFamily.includes(validFontFamilies[i])) {
+          return true;
+        }
+      }
+      return false;
+    }
+  </script>
+</body>
+
 </html>
