@@ -25,7 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Validate username against whitelist pattern
             if (!preg_match($username_pattern, $username)) {
-                exit('Invalid username format.');
+                echo "<script>alert('Invalid username format. Please try again.'); window.location.href = 'login.php';</script>";
+                exit();
             }
 
             // Retrieve user from database (replace with your own method)
@@ -41,7 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Validate password against whitelist pattern
                 if (!preg_match($password_pattern, $password)) {
-                    exit('Invalid password format.');
+                    echo "<script>alert('Invalid password format. Please try again.'); window.location.href = 'login.php';</script>";
+                    exit();
                 }
 
                 // Verify password
