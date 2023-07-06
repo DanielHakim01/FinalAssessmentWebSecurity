@@ -132,4 +132,72 @@ The username, session id and activity of each session will be recorded.
                 $_SESSION['last_activity'] = time();
 ---------------------
 
+Once user have been authenticate and authorized, user will be redirected to the home page. <br>
+The [idle.php](html/idle.php) is responsible for the idle timeout. <br>
+Here a timer will be assigned, if user is not active within 60 seconds, user will be log out automatically and their session will be destroyed. <br>
+While if user is active, their session will continue until the last-activity did not detect any activity. <br>
 
+---------------------
+            session_start();
+            
+            // Get the idle timeout in seconds
+            $idleTimeout = 60; // 1 minute
+              
+                
+            // Check if session is active
+            if (isset($_SESSION['username'])) 
+            {
+              // Check if last activity timestamp is set
+              if (isset($_SESSION['last_activity'])) 
+              {
+                // Get the current timestamp
+                $currentTimestamp = time();
+              
+            
+                // Calculate the idle time
+                $idleTime = $currentTimestamp - $_SESSION['last_activity'];
+              
+                if ($idleTime >= $idleTimeout) 
+                {
+                  // Session is idle, destroy it and redirect to login page
+                  session_unset();
+                  session_destroy();
+                  session_write_close(); // Close the session file
+                  setcookie(session_name(), '', 0, '/'); // Destroy the session cookie
+                  echo '<script>alert("Session Expired"); window.location.href = "loginGP.html";</script>';
+                  exit();       
+                } 
+                else 
+                {
+                  // Update last activity timestamp
+                 $_SESSION['last_activity'] = $currentTimestamp;    
+                }
+                      
+              } else 
+              {
+                // Set the last activity timestamp
+                 $_SESSION['last_activity'] = time();
+                      
+              }
+            } else       
+            {
+              // Session is not active, redirect to login page
+              header("Location: loginGP.html");
+              exit();
+                    
+            }
+---------------------
+
+A pop out will be shown when a user is in idle.
+
+![](screenshot/sessionEx.png)
+
+This line will be needed in every php code in order to call the [idle.php](html/idle.php)
+
+---------------------
+
+      <?php
+      require_once('../html/idle.php');  
+      ?>  
+
+---------------------
