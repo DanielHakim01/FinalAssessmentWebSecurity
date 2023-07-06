@@ -24,28 +24,9 @@ This website originally is just a static website with no authentication or autho
 ## WEB APPLICATION SECURITY ENHANCEMENTS
 
 We will be implementing these security enhancements into the web application.
-1. [Input Validation](Input Validation.md)
+1. [Input Validation](Input_Validation.md)
 2. [Authentication](Authentication.md)
-3. Authorization
-4. XSS and CSRF Prevention
-5. Database Security Principles
-6. File Security Principles
-
-### 1. Input Validation
-
-
-### 3. Authorization
-
-In this part we will be implementing Authorization which are:
-1. Session ID
-2. Session management
-3. Idle timeout
-4. Using cryptographically Random Session IDs.
-
-
-
-### 4. XSS and CSRF Prevention
-### 5. Database Security Principles
-### 6. File Security Principles
-
-
+3. [Authorization](Authorization.md)
+4. [XSS Prevention](XSS.md)
+5. [CSRF Prevention](CSRF.md)
+6. [File Security Principles](File_Security_Principles.md)
