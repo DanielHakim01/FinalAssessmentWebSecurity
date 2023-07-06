@@ -2,7 +2,7 @@
 session_start();
 
 // Get the idle timeout in seconds
-$idleTimeout = 100; // 1 minute
+$idleTimeout = 60; // 1 minute
   
     
 // Check if session is active
@@ -26,7 +26,7 @@ if (isset($_SESSION['username']))
       session_write_close(); // Close the session file
       setcookie(session_name(), '', 0, '/'); // Destroy the session cookie
       echo '<script>alert("Session Expired"); window.location.href = "loginGP.html";</script>';
-      exit();        
+      exit();       
     } 
     else 
     {
