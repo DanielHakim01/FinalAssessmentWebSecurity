@@ -17,6 +17,8 @@ In registerGP.php
 
 ## Late Validation
 
+In process_booking.php
+
 -----
            $bookingType = filter_var($_POST['bookingType'], FILTER_SANITIZE_STRING);
             $fullName = filter_var($_POST['fullName'], FILTER_SANITIZE_STRING);
