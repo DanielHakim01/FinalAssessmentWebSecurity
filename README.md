@@ -126,9 +126,18 @@ If username is not found, then user will be registered.
 
 ![](screenshot/registerSuccess.png)
 
-User will be redirected to the login page. <br>
+User will be redirected to the login page. <br><br>
 
 ### 3. Authorization
+
+In this part we will be implementing Authorization which are:
+1. Session ID
+2. Session management
+3. Idle timeout
+4. Using cryptographically Random Session IDs.
+
+
+
 ### 4. XSS and CSRF Prevention
 ### 5. Database Security Principles
 ### 6. File Security Principles
