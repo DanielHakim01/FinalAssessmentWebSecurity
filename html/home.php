@@ -16,6 +16,7 @@ require_once('../html/idle.php');
   <a href="Main_Page.html"class = "active">Home</a>
   <a href="menuGP.php">Menu</a>
   <a href="faci_info.php">Facilities</a>
+  <a href="logout.php">Logout</a>
 </div>
 
 <centre>
