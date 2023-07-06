@@ -45,7 +45,7 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['csrf_
           // Get the generated ID
           $id = mysqli_insert_id($conn);
           // Registration successful, display success message and redirect to login page
-          echo "<script>alert('User registration successful! Please login.'); window.location.href = 'loginGP.html';</script>";
+          echo "<script>alert('User registration successful! Please login.'); window.location.href = 'login.php';</script>";
           exit();
       }
        else {
@@ -86,7 +86,7 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['csrf_
             <input type="submit" class="btn btn-primary" value="Register"></button>
       
              <div class="signup_link">
-             Already a member?<a href="loginGP.html"> Log In </a>
+             Already a member?<a href="login.php"> Log In </a>
              </div>
 
     </form>

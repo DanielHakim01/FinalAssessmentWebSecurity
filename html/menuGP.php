@@ -1,6 +1,17 @@
 <?php
 require_once('../html/idle.php');  
-?>  
+
+
+// Check if the CSRF token exists in the session
+if (isset($_SESSION['csrf_token'])) {
+    $csrf_token = $_SESSION['csrf_token'];
+} else {
+    // CSRF token is not found, redirect to login page
+    echo '<script>alert("Error: CSRF token not found."); window.location.href = "login.php";</script>';
+    exit();
+}
+?>
+
 
 
 <!DOCTYPE html>
@@ -149,8 +160,7 @@ require_once('../html/idle.php');
 </html>
 
 <script>
-  function redirect(sport) {
-    window.location.replace("confirm.php?sport=" + sport);
-  }
-
+ function redirect(sport) {
+  window.location.href = "confirm.php?sport=" + encodeURIComponent(sport);
+}
 </script>

@@ -25,7 +25,7 @@ if (isset($_SESSION['username']))
       session_destroy();
       session_write_close(); // Close the session file
       setcookie(session_name(), '', 0, '/'); // Destroy the session cookie
-      echo '<script>alert("Session Expired"); window.location.href = "loginGP.html";</script>';
+      echo '<script>alert("Session Expired"); window.location.href = "login.php";</script>';
       exit();       
     } 
     else 
@@ -43,7 +43,7 @@ if (isset($_SESSION['username']))
 } else       
 {
   // Session is not active, redirect to login page
-  header("Location: loginGP.html");
+  header("Location: login.php");
   exit();
         
 }
