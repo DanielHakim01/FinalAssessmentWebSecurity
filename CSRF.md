@@ -44,3 +44,45 @@ Rather than making a file containing X-Frame-Options and CSP, we insert 2 lines 
 
 ![](screenshot/CSRFheader.png)
 
+# Anti-CSRF token
+
+## Generating an CSRF token whenever a user register or logs in. In a session, it persists throughout the session until the user logs out. To avoid session hijacking, the website validates the CSRF token attached to the user's session. If the CSRF token is mismatched user will be exited from the home page. If it matches, user can continue browsing as usual.
+
+------
+     if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+      // Check if the request method is POST
+      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if user has submitted the form
+    if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['csrf_token'])) {
+        // Validate CSRF token
+        if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+            // Show error message and redirect to login page
+            exit('Error: Invalid CSRF token.');
+        } else {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+
+------
+
+After user logs in and is redirected to menuGP.php or when they wanna book a venue, the website validates the CSRF token again.
+
+------
+
+      <?php
+      require_once('../html/idle.php');  
+      
+      
+      // Check if the CSRF token exists in the session
+      if (isset($_SESSION['csrf_token'])) {
+          $csrf_token = $_SESSION['csrf_token'];
+      } else {
+          // CSRF token is not found, redirect to login page
+          echo '<script>alert("Error: CSRF token not found."); window.location.href = "login.php";</script>';
+          exit();
+      }
+      ?>
+
+-----
