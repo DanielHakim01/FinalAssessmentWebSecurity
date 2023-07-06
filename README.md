@@ -55,10 +55,11 @@ Here user needs to input their credentials such as username and password. <br>
 
 ![](screenshot/register.png)
 
-Once user successfully registered their password will be hashed and stored in the database. <br>
+When user input their username and password and submitted the form, it will check in the database for any existing account with the same username.<br>
 
 ------
-            if(isset($_POST['username']) && isset($_POST['password'])) {
+            if(isset($_POST['username']) && isset($_POST['password'])) 
+            {
             $username = $_POST['username'];
             $password = $_POST['password'];
             
@@ -66,36 +67,62 @@ Once user successfully registered their password will be hashed and stored in th
             $sql_check = "SELECT * FROM users WHERE username='$username'";
             $result_check = mysqli_query($conn, $sql_check);
        
-           if (mysqli_num_rows($result_check) > 0) {
-               // Show error message and redirect to registration page
-               echo "<script>showError('Error: Username already exists. Please choose a different username.');</script>";
-             } elseif (strlen($password) < 8) {
-               // Show error message and redirect to registration page
-               echo "<script>showError('Error: Password must be at least 8 characters long. Please try again.');</script>";
-             } elseif (!preg_match('/^[a-zA-Z0-9]+$/', $username)) {
-               // Show error message and redirect to registration page
-               echo "<script>showError('Error: Username must contain only letters and numbers. Please try again.');</script>";
-             } else {
+            if (mysqli_num_rows($result_check) > 0) 
+            {
+                // Show error message and redirect to registration page
+                echo "<script>showError('Error: Username already exists. Please choose a different username.');</script>";
+            } 
+            elseif (strlen($password) < 8) 
+            {
+                // Show error message and redirect to registration page
+                echo "<script>showError('Error: Password must be at least 8 characters long. Please try again.');</script>";
+            } elseif (!preg_match('/^[a-zA-Z0-9]+$/', $username)) 
+            {
+                // Show error message and redirect to registration page
+                echo "<script>showError('Error: Username must contain only letters and numbers. Please try again.');</script>";
+------
+
+If existing username is found, it will prompt a pop up window.
+
+![](screenshot/userExist.png)
+
+If username is not found it will be stored in the database. <br>
+Their password will be hashed and stored in the database. <br>
+
+------
+              }
+              else 
+              {
                // Insert the username and hashed password into the database
                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
                $sql = "INSERT INTO users (username, password) VALUES ('$username','$hashed_password')";
                $result = mysqli_query($conn, $sql);
        
-               if ($result) {
+               if ($result) 
+               {
                  // Get the generated ID
                  $id = mysqli_insert_id($conn);
                  // Registration successful, display success message and redirect to login page
-                 echo "<script>alert('User registration successful! Please login.');</script>";
-                 header("Location: ../html/loginGP.html? success=User registration successful! Please login.");
+                 echo '<script>alert("User registration successful! Please login."); window.location.href = "loginGP.html";</script>' ;
                  exit();
-             }
-              else {
+               }
+              else 
+              {
                  // Show error message and redirect to registration page
                  echo "<script>showError('Error: Could not register user. Please try again.');</script>";
-               }
+              }
              }
            }
+
 ------
+
+ ![](screenshot/hashedpass.png)
+
+If username is not found, then user will be registered.
+
+![](screenshot/registerSuccess.png)
+
+User will be redirected to the login page. <br>
 
 ### 3. Authorization
 ### 4. XSS and CSRF Prevention
