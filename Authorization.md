@@ -1,12 +1,11 @@
 ### 3. Authorization
 
 In this part we will be implementing Authorization which are:
-1. Session ID
+1. Session ID using cryptographically Random Session IDs
 2. Session management
 3. Idle timeout
-4. Using cryptographically Random Session IDs.
 
-First, user need to enter their username and passwrd to continue.
+First, user need to enter their username and password to continue.
 
 -----------------
       <form class="box" action="login.php" method="post">
@@ -34,13 +33,16 @@ First, user need to enter their username and passwrd to continue.
 ![](screenshot/loginpage.png)
 
 Once user click the log in button it wil call the [login.php](html/login.php) <br>
+Here, username and password will be compared to the username and hashed password in the database. <br>
 
 ---------------------
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+    {
     // Check if user has submitted the form
 
     $conn = mysqli_connect($database_host, $database_user, $database_password, $database_name);
-    if (isset($_POST['username']) && isset($_POST['password'])) {
+    if (isset($_POST['username']) && isset($_POST['password'])) 
+    {
         $username = $_POST['username'];
         $password = $_POST['password'];
 
@@ -49,7 +51,8 @@ Once user click the log in button it wil call the [login.php](html/login.php) <b
         $password_pattern = '/^[a-zA-Z0-9!@#$%^&*()]{8,}$/'; // Allow alphanumeric and some special characters, minimum 8 characters
 
         // Validate username against whitelist pattern
-        if (!preg_match($username_pattern, $username)) {
+        if (!preg_match($username_pattern, $username)) 
+        {
             echo '<script>alert("Invalid username format."); window.location.href = "loginGP.html";</script>';
             exit();
         }
@@ -59,21 +62,64 @@ Once user click the log in button it wil call the [login.php](html/login.php) <b
         $result = mysqli_query($conn, $sql);
 
         // Check if user exists in the database
-        if (mysqli_num_rows($result) == 1) {
+        if (mysqli_num_rows($result) == 1) 
+        {
             $row = mysqli_fetch_assoc($result);
             $db_password = $row['password'];
 
             // Validate password against whitelist pattern
-            if (!preg_match($password_pattern, $password)) {
+            if (!preg_match($password_pattern, $password)) 
+            {
                 echo '<script>alert("Invalid password format."); window.location.href = "loginGP.html";</script>';
                 exit();
             }
 
-            // Verify password
-            if (password_verify($password, $db_password)) {
+                // Verify password
+            if (password_verify($password, $db_password)) 
+            {
+                // where session code will be
+                
+                // Redirect to home.php or privilege.php if the username is "admin"
+                if ($username === 'admin') {
+                    header("Location: privilege.php");
+                } else {
+                    header("Location: menuGP.php");
+                }
+                exit();
+            } 
+            else 
+            {
+                // Wrong password, display error message
+                echo '<script>alert("Wrong password. Please try again."); window.location.href = "loginGP.html";</script>';
+            }
+        } 
+        else 
+        {
+            // No username exists, display error message
+            echo '<script>alert("Invalid username. Please try again."); window.location.href = "loginGP.html";</script>';
+            exit();
+        }
+     }
+    }
+---------------------
 
-                // Login successful, generate random session ID
+If Username or pasword did not match or wrong, a window will pop out. <br>
+
+![](screenshot/loginCannot.png)
+
+User will need to enter the correct username and password in order for them to access the web application. <br><br>
+
+If Login is successful, session ID will be created using cryptographically Random Session IDs.
+
+---------------------
+       // Login successful, generate random session ID
                 $session_id = bin2hex(random_bytes(16));
+---------------------
+
+This session id will be handled by the $_SESSION super array. <br>
+The username, session id and activity of each session will be recorded.
+
+---------------------
 
                 // // Disable output buffering
                 // while (ob_get_level()) {
@@ -84,24 +130,6 @@ Once user click the log in button it wil call the [login.php](html/login.php) <b
                 $_SESSION['username'] = $username;
                 $_SESSION['session_id'] = $session_id;
                 $_SESSION['last_activity'] = time();
-
-                // Redirect to home.php or privilege.php if the username is "admin"
-                if ($username === 'admin') {
-                    header("Location: privilege.php");
-                } else {
-                    header("Location: menuGP.php");
-                }
-                exit();
-            } else {
-                // Wrong password, display error message
-                echo '<script>alert("Wrong password. Please try again."); window.location.href = "loginGP.html";</script>';
-            }
-        } else {
-            // No username exists, display error message
-            echo '<script>alert("Invalid username. Please try again."); window.location.href = "loginGP.html";</script>';
-            exit();
-        }
-    }
-// 
-}
 ---------------------
+
+
