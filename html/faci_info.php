@@ -72,11 +72,11 @@ require_once('../html/idle.php');
 <body>
   <div class="main">
     <div class="pill-nav">
-      <a style="color: #1b9284;" href="Main_Page.html">Home</a>
+      <a style="color: #1b9284;" href="home.php">Home</a>
       <a style="color: #1b9284;" href="loginGP.html">Login</a>
-      <a style="color: #1b9284;" href="menuGP.html">Menu</a>
+      <a style="color: #1b9284;" href="menuGP.php">Menu</a>
      
-      <a style="color: white;" href="faci_info.html" class="active">Facilities</a>
+      <a style="color: white;" href="faci_info.php" class="active">Facilities</a>
    
     </div>
     <h1>IIUM SPORT CENTRE</h1>
