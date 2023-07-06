@@ -10,11 +10,12 @@ if (!isset($_SESSION['csrf_token'])) {
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if user has submitted the form
-    if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['csrf_token'])) {
+    if (isset($_POST['username'], $_POST['password'], $_POST['csrf_token'])) {
         // Validate CSRF token
         if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             // Show error message and redirect to login page
-            exit('Error: Invalid CSRF token.');
+            echo '<script>alert("Invalid CSRF token."); window.location.href = "login.php";</script>';
+            exit();
         } else {
             $username = $_POST['username'];
             $password = $_POST['password'];
@@ -25,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Validate username against whitelist pattern
             if (!preg_match($username_pattern, $username)) {
-                echo "<script>alert('Invalid username format. Please try again.'); window.location.href = 'login.php';</script>";
+                echo '<script>alert("Invalid username format. Please try again."); window.location.href = "login.php";</script>';
                 exit();
             }
 
@@ -42,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Validate password against whitelist pattern
                 if (!preg_match($password_pattern, $password)) {
-                    echo "<script>alert('Invalid password format. Please try again.'); window.location.href = 'login.php';</script>";
+                    echo '<script>alert("Invalid password format. Please try again."); window.location.href = "login.php";</script>';
                     exit();
                 }
 
@@ -65,12 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit();
                 } else {
                     // Wrong password, display error message
-                    echo "<script>alert('Wrong password. Please try again.'); window.location.href = 'login.php';</script>";
+                    echo '<script>alert("Wrong password. Please try again."); window.location.href = "login.php";</script>';
                 }
             } else {
                 // No username exists, display error message
-                echo "<script>alert('Invalid username. Please try again.'); window.location.href = 'login.php';</script>";
-               
+                echo '<script>alert("Invalid username. Please try again."); window.location.href = "login.php";</script>';
             }
         }
     }
@@ -86,64 +86,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </head>
 
   <body>
-  <form class="box" action="login.php" method="post" onsubmit="return validateForm()">
-    <h1>LOG IN TO YOUR ACCOUNT</h1>
+    <form class="box" action="login.php" method="post" onsubmit="return validateForm()">
+      <h1>LOG IN TO YOUR ACCOUNT</h1>
 
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required><br><br>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required><br><br>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br><br>
 
-    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+      <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
 
-    <input type="submit" value="LOG IN"/>
+      <input type="submit" value="LOG IN"/>
 
-    <div class="signup_link">
-      Don't have an account? <a href="registerGP.php">Sign Up</a>
-    </div>
-  </form>
+      <div class="signup_link">
+        Don't have an account? <a href="registerGP.php">Sign Up</a>
+      </div>
+    </form>
 
-  <script>
-    function validateForm() {
-      // Valid font families
-      var validFontFamilies = [
-        "-apple-system",
-        "BlinkMacSystemFont",
-        "Segoe UI",
-        "Roboto",
-        "Oxygen-Sans",
-        "Ubuntu",
-        "Cantarell",
-        "Helvetica Neue",
-        "sans-serif"
-      ];
+    <script>
+      function validateForm() {
+        // Valid font families
+        var validFontFamilies = [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Oxygen-Sans",
+          "Ubuntu",
+          "Cantarell",
+          "Helvetica Neue",
+          "sans-serif"
+        ];
 
-      // Validate font family
-      var inputs = document.getElementsByTagName("input");
+        // Validate font family
+        var inputs = document.getElementsByTagName("input");
 
-      for (var i = 0; i < inputs.length; i++) {
-        var font = window.getComputedStyle(inputs[i], null).getPropertyValue("font-family");
+        for (var i = 0; i < inputs.length; i++) {
+          var font = window.getComputedStyle(inputs[i], null).getPropertyValue("font-family");
 
-        if (!isValidFontFamily(font)) {
-          alert("Please use the system default font for input fields.");
-          inputs[i].focus();
-          return false;
+          if (!isValidFontFamily(font)) {
+            alert("Please use the system default font for input fields.");
+            inputs[i].focus();
+            return false;
+          }
         }
+
+        return true;
       }
 
-      return true;
-    }
-
-    function isValidFontFamily(fontFamily) {
-      for (var i = 0; i < validFontFamilies.length; i++) {
-        if (fontFamily.includes(validFontFamilies[i])) {
-          return true;
+      function isValidFontFamily(fontFamily) {
+        for (var i = 0; i < validFontFamilies.length; i++) {
+          if (fontFamily.includes(validFontFamilies[i])) {
+            return true;
+          }
         }
+        return false;
       }
-      return false;
-    }
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
