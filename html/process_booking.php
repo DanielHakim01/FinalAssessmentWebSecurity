@@ -1,6 +1,6 @@
 <?php
 require_once('../app/config.php');
-
+require_once('../html/idle.php');  
 
 
 $conn = mysqli_connect($database_host, $database_user, $database_password, $database_name);
