@@ -1,3 +1,7 @@
+<?php
+require_once('../html/idle.php');  
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -124,6 +128,7 @@
             <input type="submit" value="Confirm Booking">
         </form>
         </div>
+
     </div>
 
     <script>
