@@ -1,6 +1,15 @@
 <?php
 require_once('../html/idle.php');  
+// Check if the CSRF token exists in the session
+if (isset($_SESSION['csrf_token'])) {
+    $csrf_token = $_SESSION['csrf_token'];
+} else {
+    // CSRF token is not found, redirect to login page
+    echo '<script>alert("Error: CSRF token not found."); window.location.href = "login.php";</script>';
+    exit();
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -94,7 +103,8 @@ require_once('../html/idle.php');
             <br><br>
 
             <label for="fullName">Full Name:</label>
-      <input type="text" id="fullName" name="fullName" pattern="[A-Za-z]+" title="Please enter letters only" required>
+<input type="text" id="fullName" name="fullName" pattern="[A-Za-z ]+" title="Please enter letters and spaces only" required>
+
       <br><br>
 
       <label for="matricID">Matric ID:</label>
@@ -124,7 +134,7 @@ require_once('../html/idle.php');
             <label for="participants">Number of Participants:</label>
             <input type="number" id="participants" name="participants" required>
             <br><br>
-
+            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
             <input type="submit" value="Confirm Booking">
         </form>
         </div>
