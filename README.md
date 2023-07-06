@@ -25,7 +25,7 @@ This website originally is just a static website with no authentication or autho
 
 We will be implementing these security enhancements into the web application.
 1. Input Validation
-2. Authentication
+2. [Authentication](Authentication.md)
 3. Authorization
 4. XSS and CSRF Prevention
 5. Database Security Principles
