@@ -7,7 +7,7 @@ GROUP ADHD <br> <br>
 GROUP MEMBER: <br> <br>
  MUHAMMAD DANIEL HAKIM BIN MOHD SUHAIMI 2018451 <br> <br>
  ONG <br> <br>
- ABU <br> <br>
+ ABU ZHARR LUQMAN BIN ABDUL AZIZ<br> <br>
  DIN <br> <br>
 </h2>
 
