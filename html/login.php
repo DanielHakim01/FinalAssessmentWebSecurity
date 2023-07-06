@@ -40,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (password_verify($password, $db_password)) {
 
                 // Login successful, generate random session ID
-                $session_id = bin2hex(random_bytes(16));
+                session_regenerate_id(true);
+                $session_id = session_id();
 
                 // // Disable output buffering
                 // while (ob_get_level()) {
