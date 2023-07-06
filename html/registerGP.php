@@ -57,7 +57,7 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 
     if (mysqli_num_rows($result_check) > 0) {
         // Show error message and redirect to registration page
-        echo "<script>showError('Error: Username already exists. Please choose a different username.');</script>";
+        echo '<script>alert("Username already exists. Please choose a different username."); window.location.href = "registerGP.php";</script>';
       } elseif (strlen($password) < 8) {
         // Show error message and redirect to registration page
         echo "<script>showError('Error: Password must be at least 8 characters long. Please try again.');</script>";
@@ -74,7 +74,7 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
           // Get the generated ID
           $id = mysqli_insert_id($conn);
           // Registration successful, display success message and redirect to login page
-          echo "<script>alert('User registration successful! Please login.'); window.location.href = 'loginGP.html';</script>";
+          echo '<script>alert("User registration successful! Please login."); window.location.href = "loginGP.html";</script>' ;
           exit();
       }
        else {
