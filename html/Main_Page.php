@@ -1,5 +1,4 @@
 <?php
-include 'security.php'; 
 require_once('../html/idle.php');  
 ?>
 <!DOCTYPE html>
