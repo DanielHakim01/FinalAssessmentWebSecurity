@@ -39,3 +39,7 @@ Header always set X-Frame-Options "SAMEORIGIN"
 Header always set Content-Security-Policy "default-src 'self'"
 ------
 
+# Header Response
+
+![](screenshot/CSRFheader.png)
+

@@ -1,9 +1,10 @@
 ### 3. Authorization
 
 In this part we will be implementing Authorization which are:
-1. Session ID using cryptographically Random Session IDs
+1. Session ID using cryptographically secure random number generator (CSPRNG)
 2. Session management
 3. Idle timeout
+4. Log out
 
 First, user need to enter their username and password to continue.
 
@@ -109,11 +110,14 @@ If Username or pasword did not match or wrong, a window will pop out. <br>
 
 User will need to enter the correct username and password in order for them to access the web application. <br><br>
 
-If Login is successful, session ID will be created using cryptographically Random Session IDs.
+If Login is successful, session ID will be created using cryptographically Random Session IDs.<br>
+When true is pass as the argument to session_regenerate_id(), it instructs PHP to use a CSPRNG to generate a new session ID.<br>
+PHP uses the underlying operating system's CSPRNG, which ensures that the generated session ID is highly unpredictable and suitable for secure session management. This helps protect against session fixation attacks and enhances the security of application.<br>
 
 ---------------------
        // Login successful, generate random session ID
-                $session_id = bin2hex(random_bytes(16));
+                session_regenerate_id(true);
+                $session_id = session_id();
 ---------------------
 
 This session id will be handled by the $_SESSION super array. <br>
