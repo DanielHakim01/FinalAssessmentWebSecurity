@@ -24,7 +24,7 @@ This website originally is just a static website with no authentication or autho
 ## WEB APPLICATION SECURITY ENHANCEMENTS
 
 We will be implementing these security enhancements into the web application.
-1. Input Validation
+1. [Input Validation](Input Validation.md)
 2. [Authentication](Authentication.md)
 3. Authorization
 4. XSS and CSRF Prevention
