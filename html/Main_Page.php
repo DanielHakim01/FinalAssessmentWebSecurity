@@ -1,4 +1,7 @@
-<?php include 'security.php'; ?>
+<?php
+include 'security.php'; 
+require_once('../html/idle.php');  
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
