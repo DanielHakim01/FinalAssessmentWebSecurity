@@ -13,8 +13,8 @@ require_once('../html/idle.php');
 
 <div class="pill-nav">
 
-    <a href="Main_Page.html"class = "active">Home</a>
-    <a href="loginGP.html">Login</a>
+    <a href="Main_Page.php" class ="active">Home</a>
+    <a href="login.php">Login</a>
   </div>
 
 <center>
@@ -23,7 +23,7 @@ require_once('../html/idle.php');
 <h1 class="box">IIUM One Sport Centre</h1>
 
 
-<input type="submit" class="buttonlogin" name="" value="LOGIN/SIGN UP HERE" onclick="location.href='loginGP.html'" />
+<input type="submit" class="buttonlogin" name="" value="LOGIN/SIGN UP HERE" onclick="location.href='login.php'" />
 </div>
 </center>
 

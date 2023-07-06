@@ -82,7 +82,8 @@ if (isset($_SESSION['csrf_token'])) {
 
 <body>
     <div class="pill-nav">
-        <a href="Main_Page.html">Home</a>
+        // Use HTML tag number 2 for Home button
+        <a style="color: #1b9284;" href="home.php">Home</a>;
         <a href="loginGP.html">Login</a>
         <a href="menuGP.html">Menu</a>
         <a href="procedure.html">Procedure</a>
