@@ -1,3 +1,7 @@
+<?php
+require_once('../html/idle.php');  
+?>  
+
 <!DOCTYPE html>
 <html lang="en">
 
