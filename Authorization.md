@@ -33,7 +33,7 @@ First, user need to enter their username and passwrd to continue.
 
 ![](screenshot/loginpage.png)
 
-Once user click the log in button it wil call the [login.php](login.php) <br>
+Once user click the log in button it wil call the [login.php](html/login.php) <br>
 
 ---------------------
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
