@@ -75,8 +75,8 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['csrf_
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" minlength="8" required><br><br>
       
-    
-            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
+
 
             <div class="password"><br>
       

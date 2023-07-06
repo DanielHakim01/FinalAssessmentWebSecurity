@@ -135,7 +135,7 @@ if (isset($_SESSION['csrf_token'])) {
             <label for="participants">Number of Participants:</label>
             <input type="number" id="participants" name="participants" required>
             <br><br>
-            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
             <input type="submit" value="Confirm Booking">
         </form>
         </div>
