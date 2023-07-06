@@ -31,7 +31,9 @@ if (
             VALUES ('$bookingType', '$fullName', '$matricID', '$email', '$timeSlot', '$contactNumber', '$participants')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Booking confirmed successfully!";
+        echo "Booking Successful!";
+        echo '<script>setTimeout(function() { window.location.href = "menuGP.php"; }, 3000);</script>';
+        exit();
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
