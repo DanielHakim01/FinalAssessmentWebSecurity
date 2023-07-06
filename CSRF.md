@@ -46,8 +46,9 @@ Rather than making a file containing X-Frame-Options and CSP, we insert 2 lines 
 
 # Anti-CSRF token
 
-## Generating an CSRF token whenever a user register or logs in. In a session, it persists throughout the session until the user logs out. To avoid session hijacking, the website validates the CSRF token attached to the user's session. If the CSRF token is mismatched user will be exited from the home page. If it matches, user can continue browsing as usual.
+## Generating an CSRF token whenever a user register or logs in. In a session, it persists throughout the session until the user logs out. To avoid session hijacking, the website validates the CSRF token attached to the user's session, through the header or hidden input. If the CSRF token is mismatched user will be exited from the home page. If it matches, user can continue browsing as usual.
 
+Through the header
 ------
      if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -85,4 +86,15 @@ After user logs in and is redirected to menuGP.php or when they wanna book a ven
       }
       ?>
 
+-----
+
+Through the hidden input field
+(in login.php)
+-----
+       <input type="password" id="password" name="password" required><br><br>
+      
+      <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+      
+      <input type="submit" value="LOG IN"/>
+  
 -----
