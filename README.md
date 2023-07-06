@@ -34,7 +34,11 @@ We will be implementing these security enhancements into the web application.
 ### 1. Input Validation
 ### 2. Authentication
 
-In this part, we will be implementing Authentication measures. <br>
+In this part, we will be implementing Authentication measures which are:. <br>
+1. Identification
+2. Confirmation
+3. Hashed password
+
 Firstly, new user will need to register their account before they can access the web application. <br>
 Here user needs to input their credentials such as username and password. <br>
 
