@@ -25,7 +25,7 @@ if (isset($_SESSION['username']))
       session_destroy();
       session_write_close(); // Close the session file
       setcookie(session_name(), '', 0, '/'); // Destroy the session cookie
-      header("Location: loginGP.html?error=Session expired due to inactivity.");
+      echo '<script>alert("Session Expired"); window.location.href = "loginGP.html";</script>';
       exit();        
     } 
     else 
