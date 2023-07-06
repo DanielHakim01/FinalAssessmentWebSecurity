@@ -29,4 +29,5 @@ We will be implementing these security enhancements into the web application.
 3. [Authorization](Authorization.md)
 4. [XSS Prevention](XSS.md)
 5. [CSRF Prevention](CSRF.md)
-6. [File Security Principles](File_Security_Principle.md)
+6. [Database Security Principles](Database_Security_Principle.md)
+7. [File Security Principles](File_Security_Principle.md)
