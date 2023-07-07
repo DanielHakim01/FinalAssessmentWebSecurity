@@ -75,7 +75,7 @@ require_once('../html/idle.php');
 <body>
   <div class="main">
     <div class="pill-nav">
-      <a style="color: #1b9284;" href="home.php">Home</a>;
+      <a style="color: #1b9284;" href="Main_page.php">Home</a>;
       <a style="color: #1b9284;" href="menuGP.php">Menu</a>
       <a style="color: white;" href="faci_info.php" class="active">Facilities</a>
       <a style="color: #1b9284;" href="login.php">Logout</a>
