@@ -54,7 +54,8 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['csrf_
         }
       }
     }
-    ?>
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -69,7 +70,7 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['csrf_
       <h1>CREATE AN ACCOUNT</h1>
 
            <label for="username">Username:</label>
-            <input type="text" id="username" name="username"  pattern="[a-z0-9]+" required><br><br>
+            <input type="text" id="username" name="username" required><br><br>
       
       
             <label for="password">Password:</label>

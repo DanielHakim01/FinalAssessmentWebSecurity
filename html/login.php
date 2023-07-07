@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <h1>LOG IN TO YOUR ACCOUNT</h1>
 
       <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required><br><br>
+      <input type="text" id="username" name="username" pattern="[a-z0-9]+" required><br><br>
 
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required><br><br>
