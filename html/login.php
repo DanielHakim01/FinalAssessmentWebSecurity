@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Validate CSRF token
         if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             // Show error message and redirect to login page
-            echo '<script>alert("Invalid CSRF token."); window.location.href = "login.php";</script>';
+            echo '<script>alert("Error: Invalid CSRF token."); window.location.href = "login.php";</script>';
             exit();
         } else {
             $username = $_POST['username'];
@@ -22,11 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Whitelist validation using regex
             $username_pattern = '/^[a-zA-Z0-9_]{3,20}$/'; // Allow alphanumeric and underscore, 3-20 characters
-            $password_pattern = '/^[a-zA-Z0-9!@#$%^&*()]{8,}$/'; // Allow alphanumeric and some special characters, minimum 8 characters
+            $password_pattern = '/^[a-zA-Z0-9!@#$%^&*()_]{8,}$/'; // Allow alphanumeric and some special characters, minimum 8 characters
 
             // Validate username against whitelist pattern
             if (!preg_match($username_pattern, $username)) {
-                echo '<script>alert("Invalid username format. Please try again."); window.location.href = "login.php";</script>';
+                echo '<script>alert("Error: Invalid username format. Please try again."); window.location.href = "login.php";</script>';
                 exit();
             }
 
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Validate password against whitelist pattern
                 if (!preg_match($password_pattern, $password)) {
-                    echo '<script>alert("Invalid password format. Please try again."); window.location.href = "login.php";</script>';
+                    echo '<script>alert("Error: Invalid password format. Please try again."); window.location.href = "login.php";</script>';
                     exit();
                 }
 
@@ -66,11 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit();
                 } else {
                     // Wrong password, display error message
-                    echo '<script>alert("Wrong password. Please try again."); window.location.href = "login.php";</script>';
+                    echo '<script>alert("Error: Wrong password. Please try again."); window.location.href = "login.php";</script>';
                 }
             } else {
                 // No username exists, display error message
-                echo '<script>alert("Invalid username. Please try again."); window.location.href = "login.php";</script>';
+                echo '<script>alert("Error: Invalid username. Please try again."); window.location.href = "login.php";</script>';
             }
         }
     }
@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           var font = window.getComputedStyle(inputs[i], null).getPropertyValue("font-family");
 
           if (!isValidFontFamily(font)) {
-            alert("Please use the system default font for input fields.");
+            alert("Error: Please use the system default font for input fields.");
             inputs[i].focus();
             return false;
           }

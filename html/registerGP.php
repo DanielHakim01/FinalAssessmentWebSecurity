@@ -28,29 +28,39 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['csrf_
 
     if (mysqli_num_rows($result_check) > 0) {
         // Show error message and redirect to registration page
-        echo "<script>showError('Error: Username already exists. Please choose a different username.');</script>";
+        echo "<script>showError('Error: Username already exists. Please choose a different username.'); window.location.href = 'registerGP.php';</script>";
+        exit();
       } elseif (strlen($password) < 8) {
         // Show error message and redirect to registration page
-        echo "<script>showError('Error: Password must be at least 8 characters long. Please try again.');</script>";
+        echo "<script>showError('Error: Password must be at least 8 characters long. Please try again.'); window.location.href = 'registerGP.php';</script>";
+        exit();
       } elseif (!preg_match('/^[a-zA-Z0-9]+$/', $username)) {
         // Show error message and redirect to registration page
-        echo "<script>showError('Error: Username must contain only letters and numbers. Please try again.');</script>";
+        echo "<script>showError('Error: Username must contain only letters and numbers. Please try again.'); window.location.href = 'registerGP.php';</script>";
+        exit();
       } else {
+        if (!preg_match('/^[a-zA-Z0-9!@#$%^&*()_]{8,}$/', $password)) {
+        echo "<script>showError('Error: Incorrect Password Format. Please try again.'); window.location.href = 'registerGP.php';</script>";
+        exit();
+        }
+        else {
         // Insert the username and hashed password into the database
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO users (username, password) VALUES ('$username','$hashed_password')";
         $result = mysqli_query($conn, $sql);
-
+        }
+        
         if ($result) {
           // Get the generated ID
           $id = mysqli_insert_id($conn);
           // Registration successful, display success message and redirect to login page
           echo "<script>alert('User registration successful! Please login.'); window.location.href = 'login.php';</script>";
           exit();
-      }
-       else {
+        }
+        else {
           // Show error message and redirect to registration page
           echo "<script>showError('Error: Could not register user. Please try again.');</script>";
+          exit();
         }
       }
     }
