@@ -111,7 +111,7 @@
 
         <h3>Below is a video that showcases our gym in the sports facility.</h3>
         <div>
-        <iframe src="https://drive.google.com/file/d/1mZxyLrcaU2Pwim8ibL8MmzODTGuFBoWt/preview" width="640" height="480" frameborder="0" allowfullscreen></iframe>
+        <iframe src="../asset/videoGym.mp4" width="640" height="480" frameborder="0" allowfullscreen></iframe>
          
         </div>
 </body>
