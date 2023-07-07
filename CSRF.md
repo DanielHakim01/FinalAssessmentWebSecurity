@@ -5,8 +5,7 @@ CSP header sets the policy to allow content only from the same origin ('self')
 Preventing clickjacking attacks (X-Frame-Options)
 Enforcing a content security policy to mitigate cross-site scripting (XSS) and other code injection vulnerabilities (Content-Security-Policy).
 
-      header("Content-Security-Policy: default-src 'self';");
-
+            Header always set Content-Security-Policy "default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; media-src 'self'"
 # X-Frame-Options
 
 ------
