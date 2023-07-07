@@ -36,8 +36,7 @@ Rather than making a file containing X-Frame-Options and CSP, we insert 2 lines 
      Header always set X-Frame-Options "SAMEORIGIN" 
 ------
 
-    Header always set Content-Security-Policy "default-src 'self'"
-------
+     Header always set Content-Security-Policy "default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; media-src 'self'"------
 
 # Header Response
 
