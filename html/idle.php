@@ -3,48 +3,41 @@ session_start();
 
 // Get the idle timeout in seconds
 $idleTimeout = 60; // 1 minute
-  
-    
+
+
 // Check if session is active
-if (isset($_SESSION['username'])) 
-{
+if (isset($_SESSION['username'])) {
   // Check if last activity timestamp is set
-  if (isset($_SESSION['last_activity'])) 
-  {
+  if (isset($_SESSION['last_activity'])) {
     // Get the current timestamp
     $currentTimestamp = time();
-  
+
 
     // Calculate the idle time
     $idleTime = $currentTimestamp - $_SESSION['last_activity'];
-  
-    if ($idleTime >= $idleTimeout) 
-    {
+
+    if ($idleTime >= $idleTimeout) {
       // Session is idle, destroy it and redirect to login page
       session_unset();
       session_destroy();
       session_write_close(); // Close the session file
       setcookie(session_name(), '', 0, '/'); // Destroy the session cookie
       echo '<script>alert("Session Expired"); window.location.href = "login.php";</script>';
-      exit();       
-    } 
-    else 
-    {
+      exit();
+    } else {
       // Update last activity timestamp
-     $_SESSION['last_activity'] = $currentTimestamp;    
+      $_SESSION['last_activity'] = $currentTimestamp;
     }
-          
-  } else 
-  {
+
+  } else {
     // Set the last activity timestamp
-     $_SESSION['last_activity'] = time();
-          
+    $_SESSION['last_activity'] = time();
+
   }
-} else       
-{
+} else {
   // Session is not active, redirect to login page
   header("Location: login.php");
   exit();
-        
+
 }
 ?>

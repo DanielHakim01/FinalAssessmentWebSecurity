@@ -1,14 +1,14 @@
 <?php
-require_once('../html/idle.php');  
+require_once('../html/idle.php');
 
 
 // Check if the CSRF token exists in the session
 if (isset($_SESSION['csrf_token'])) {
-    $csrf_token = $_SESSION['csrf_token'];
+  $csrf_token = $_SESSION['csrf_token'];
 } else {
-    // CSRF token is not found, redirect to login page
-    echo '<script>alert("Error: CSRF token not found."); window.location.href = "login.php";</script>';
-    exit();
+  // CSRF token is not found, redirect to login page
+  echo '<script>alert("Error: CSRF token not found."); window.location.href = "login.php";</script>';
+  exit();
 }
 ?>
 
@@ -101,7 +101,7 @@ if (isset($_SESSION['csrf_token'])) {
 <body>
   <div class="main">
     <div class="pill-nav">
-      <a style="color: #1b9284;" href="home.php">Home</a>;  
+      <a style="color: #1b9284;" href="home.php">Home</a>;
       <a style="color: white;" href="menuGP.php" class="active">Menu</a>
       <a style="color: #1b9284;" href="faci_info.php">Facilities</a>
       <a style="color: #1b9284;" href="logout.php">Logout</a>
@@ -155,12 +155,12 @@ if (isset($_SESSION['csrf_token'])) {
 
   </div>
 
-  </body>
+</body>
 
 </html>
 
 <script>
- function redirect(sport) {
-  window.location.href = "confirm.php?sport=" + encodeURIComponent(sport);
-}
+  function redirect(sport) {
+    window.location.href = "confirm.php?sport=" + encodeURIComponent(sport);
+  }
 </script>

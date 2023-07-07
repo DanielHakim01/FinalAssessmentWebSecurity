@@ -1,6 +1,6 @@
 <?php
-require_once('../html/idle.php');  
-?>  
+require_once('../html/idle.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +44,10 @@ require_once('../html/idle.php');
       color: #1b9284;
     }
 
-    h1, h2, h3, p {
+    h1,
+    h2,
+    h3,
+    p {
       color: #1b9284;
     }
 
@@ -76,7 +79,7 @@ require_once('../html/idle.php');
       <a style="color: #1b9284;" href="menuGP.php">Menu</a>
       <a style="color: white;" href="faci_info.php" class="active">Facilities</a>
       <a style="color: #1b9284;" href="login.php">Logout</a>
-   
+
     </div>
     <h1>IIUM SPORT CENTRE</h1>
     <hr>
